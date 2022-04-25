@@ -1,27 +1,24 @@
+const { ApolloServerPluginLandingPageGraphQLPlayground } = require("apollo-server-core");
 const { ApolloServer, gql } = require("apollo-server");
 
 const typeDefs = gql`
-  type Book {
-    title: String
-    author: String
-  }
-
   type Query {
-    books: [Book]
+    ola: String!
   }
 `;
 
 const resolvers = {
   Query: {
-    books: () => books,
+    ola: () => "Hello World",
   },
 };
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 });
 
 server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
+  console.log(`🚀 Server ready at ${url}`);
 });
