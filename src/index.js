@@ -2,14 +2,16 @@ const { ApolloServerPluginLandingPageGraphQLPlayground } = require("apollo-serve
 const { ApolloServer, gql } = require("apollo-server");
 
 const typeDefs = gql`
+  scalar Date
+
   type Query {
-    ola: String!
+    horaAtual: Date
   }
 `;
 
 const resolvers = {
   Query: {
-    ola: () => "Hello World",
+    horaAtual: () => new Date(),
   },
 };
 
