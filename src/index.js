@@ -20,14 +20,19 @@ const typeDefs = gql`
 `;
 
 const resolvers = {
+  User: {
+    wage: (user) => user.wage_montly,
+  },
+
   Query: {
     currentTime: () => new Date(),
+
     userLoggedIn: () => ({
       id: "fbb12189-fd97-4c94-acb7-aa02f6811125",
       name: "Henrique",
       email: "bortolettohenrique@gmail.com",
       age: 29,
-      wage: 1234.56,
+      wage_montly: 1234.56,
       vip: true,
     }),
   },
@@ -40,5 +45,5 @@ const server = new ApolloServer({
 });
 
 server.listen().then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`);
+  console.log(`🚀🚀 Server ready at ${url} 🚀🚀`);
 });
