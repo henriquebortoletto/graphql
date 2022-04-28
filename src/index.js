@@ -2,38 +2,28 @@ const { ApolloServerPluginLandingPageGraphQLPlayground } = require("apollo-serve
 const { ApolloServer, gql } = require("apollo-server");
 
 const typeDefs = gql`
-  scalar Date
-
-  type User {
-    id: ID
+  type Product {
     name: String!
-    email: String!
-    age: Int
-    wage: Float
-    vip: Boolean
+    price: Float!
+    discount: Float
+    discountPrice: Float
   }
 
   type Query {
-    currentTime: Date
-    userLoggedIn: User
+    featuredProduct: Product
   }
 `;
 
 const resolvers = {
-  User: {
-    wage: (user) => user.wage_montly,
+  Product: {
+    discountPrice: ({ discount, price }) => (discount ? price * (1 - discount) : price),
   },
 
   Query: {
-    currentTime: () => new Date(),
-
-    userLoggedIn: () => ({
-      id: "fbb12189-fd97-4c94-acb7-aa02f6811125",
-      name: "Henrique",
-      email: "bortolettohenrique@gmail.com",
-      age: 29,
-      wage_montly: 1234.56,
-      vip: true,
+    featuredProduct: () => ({
+      name: "Iphone 12",
+      price: 500000,
+      discount: 0.5,
     }),
   },
 };
