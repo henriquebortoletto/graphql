@@ -1,30 +1,47 @@
 const { ApolloServerPluginLandingPageGraphQLPlayground } = require("apollo-server-core");
 const { ApolloServer, gql } = require("apollo-server");
 
+const users = [
+  {
+    id: 1,
+    name: "Henrique Bortoletto",
+    email: "bortolettohenrique@gmail.com",
+    age: 29,
+  },
+  {
+    id: 2,
+    name: "John Doe",
+    email: "johndoe@gmail.com",
+  },
+  {
+    id: 3,
+    name: "Jane Doe",
+    email: "janedoe@gmail.com",
+  },
+];
+
 const typeDefs = gql`
-  type Product {
+  type User {
+    id: Int!
     name: String!
-    price: Float!
-    discount: Float
-    discountPrice: Float
+    email: String!
+    age: Int
   }
 
   type Query {
-    featuredProduct: Product
+    users: [User!]
+    user(id: Int): User
   }
 `;
 
 const resolvers = {
-  Product: {
-    discountPrice: ({ discount, price }) => (discount ? price * (1 - discount) : price),
-  },
-
   Query: {
-    featuredProduct: () => ({
-      name: "Iphone 12",
-      price: 500000,
-      discount: 0.5,
-    }),
+    users: () => users,
+
+    user: (_, { id }) => {
+      const userAlreadyExists = users.filter((user) => user.id === id);
+      return userAlreadyExists.length ? userAlreadyExists[0] : null;
+    },
   },
 };
 

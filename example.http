@@ -1,5 +1,4 @@
-
-### GET USER LOGGED IN
+### GET USERS ALL
 
 curl 'http://localhost:4000/' \
   -H 'Accept-Encoding: gzip, deflate, br' \
@@ -8,5 +7,17 @@ curl 'http://localhost:4000/' \
   -H 'Connection: keep-alive' \
   -H 'DNT: 1' \
   -H 'Origin: http://localhost:4000' \
-  --data-binary '{"query":"# Write your query or mutation here\n{\n  currentTime\n  userLoggedIn {\n    id\n    name\n    email\n    wage\n    vip\n  }\n}"}'
+  --data-binary '{"query":"# Write your query or mutation here\n{\n  users {\n    id\n    name\n    email\n    age\n  }\n}\n"}' \
+  --compressed
+
+### GET USER BY ID
+
+curl 'http://localhost:4000/' \
+  -H 'Accept-Encoding: gzip, deflate, br' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Connection: keep-alive' \
+  -H 'DNT: 1' \
+  -H 'Origin: http://localhost:4000' \
+  --data-binary '{"query":"# Write your query or mutation here\n{\n  user(id: 1) {\n    id\t\n    name\n    email\n    age\n  }\n}\n"}' \
   --compressed
