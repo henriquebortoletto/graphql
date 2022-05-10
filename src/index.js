@@ -20,6 +20,21 @@ const users = [
   },
 ];
 
+const profiles = [
+  {
+    id: 1,
+    name: "user",
+  },
+  {
+    id: 2,
+    name: "client",
+  },
+  {
+    id: 3,
+    name: "administrator",
+  },
+];
+
 const typeDefs = gql`
   type User {
     id: Int!
@@ -28,19 +43,37 @@ const typeDefs = gql`
     age: Int
   }
 
+  type Role {
+    id: Int!
+    name: String!
+  }
+
   type Query {
-    users: [User!]
+    users: [User!]!
     user(id: Int): User
+    profiles: [Role!]!
+    profile(id: Int): Role
   }
 `;
 
 const resolvers = {
   Query: {
-    users: () => users,
+    users: () => {
+      return users;
+    },
 
     user: (_, { id }) => {
       const userAlreadyExists = users.filter((user) => user.id === id);
       return userAlreadyExists.length ? userAlreadyExists[0] : null;
+    },
+
+    profiles: () => {
+      return profiles;
+    },
+
+    profile: (_, { id }) => {
+      const profileAlreadyExists = profiles.filter((profile) => profile.id === id);
+      return profileAlreadyExists.length ? profileAlreadyExists[0] : null;
     },
   },
 };

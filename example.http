@@ -21,3 +21,27 @@ curl 'http://localhost:4000/' \
   -H 'Origin: http://localhost:4000' \
   --data-binary '{"query":"# Write your query or mutation here\n{\n  user(id: 1) {\n    id\t\n    name\n    email\n    age\n  }\n}\n"}' \
   --compressed
+
+### GET PROFILE BY ID
+
+curl 'http://localhost:4000/' \
+  -H 'Accept-Encoding: gzip, deflate, br' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Connection: keep-alive' \
+  -H 'DNT: 1' \
+  -H 'Origin: http://localhost:4000' \
+  --data-binary '{"query":"# Write your query or mutation here\n{\n\tprofile(id: 1) {\n    name\n    id\n  }\n}"}' \
+  --compressed
+
+### GET PROFILES ALL
+
+curl 'http://localhost:4000/' \
+  -H 'Accept-Encoding: gzip, deflate, br' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Connection: keep-alive' \
+  -H 'DNT: 1' \
+  -H 'Origin: http://localhost:4000' \
+  --data-binary '{"query":"# Write your query or mutation here\n{\n\tprofiles {\n    id\n    name\n  }\n}"}' \
+  --compressed
