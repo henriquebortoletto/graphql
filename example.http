@@ -31,10 +31,10 @@ curl 'http://localhost:4000/' \
   -H 'Connection: keep-alive' \
   -H 'DNT: 1' \
   -H 'Origin: http://localhost:4000' \
-  --data-binary '{"query":"# Write your query or mutation here\n{\n\tprofile(id: 1) {\n    name\n    id\n  }\n}"}' \
+  --data-binary '{"query":"# Write your query or mutation here\n{\n  role(id: 1) {\n    id\n    name\n  }\n}"}' \
   --compressed
 
-### GET PROFILES ALL
+### GET ROLES ALL
 
 curl 'http://localhost:4000/' \
   -H 'Accept-Encoding: gzip, deflate, br' \
@@ -43,5 +43,17 @@ curl 'http://localhost:4000/' \
   -H 'Connection: keep-alive' \
   -H 'DNT: 1' \
   -H 'Origin: http://localhost:4000' \
-  --data-binary '{"query":"# Write your query or mutation here\n{\n\tprofiles {\n    id\n    name\n  }\n}"}' \
+  --data-binary '{"query":"# Write your query or mutation here\n{\n  roles {\n    id\n    name\n  }\n}"}' \
+  --compressed
+
+### GET USERS BY ROLES
+
+curl 'http://localhost:4000/' \
+  -H 'Accept-Encoding: gzip, deflate, br' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Connection: keep-alive' \
+  -H 'DNT: 1' \
+  -H 'Origin: http://localhost:4000' \
+  --data-binary '{"query":"# Write your query or mutation here\n{\n  users {\n    id\n    name\n    email\n    age\n    role {\n      id\n      name\n    }\n  }\n}"}' \
   --compressed

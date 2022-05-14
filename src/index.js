@@ -7,20 +7,23 @@ const users = [
     name: "Henrique Bortoletto",
     email: "bortolettohenrique@gmail.com",
     age: 29,
+    role_id: 3,
   },
   {
     id: 2,
     name: "John Doe",
     email: "johndoe@gmail.com",
+    role_id: 1,
   },
   {
     id: 3,
     name: "Jane Doe",
     email: "janedoe@gmail.com",
+    role_id: 2,
   },
 ];
 
-const profiles = [
+const roles = [
   {
     id: 1,
     name: "user",
@@ -41,6 +44,7 @@ const typeDefs = gql`
     name: String!
     email: String!
     age: Int
+    role: Role
   }
 
   type Role {
@@ -51,29 +55,36 @@ const typeDefs = gql`
   type Query {
     users: [User!]!
     user(id: Int): User
-    profiles: [Role!]!
-    profile(id: Int): Role
+    roles: [Role!]!
+    role(id: Int): Role
   }
 `;
 
 const resolvers = {
+  User: {
+    role: ({ role_id }) => {
+      const userRoleExists = roles.filter(({ id }) => id === role_id);
+      return userRoleExists.length ? userRoleExists[0] : null;
+    },
+  },
+
   Query: {
     users: () => {
       return users;
     },
 
-    user: (_, { id }) => {
-      const userAlreadyExists = users.filter((user) => user.id === id);
+    user: (_, { id: user_id }) => {
+      const userAlreadyExists = users.filter(({ id }) => id === user_id);
       return userAlreadyExists.length ? userAlreadyExists[0] : null;
     },
 
-    profiles: () => {
-      return profiles;
+    roles: () => {
+      return roles;
     },
 
-    profile: (_, { id }) => {
-      const profileAlreadyExists = profiles.filter((profile) => profile.id === id);
-      return profileAlreadyExists.length ? profileAlreadyExists[0] : null;
+    role: (_, { id: role_id }) => {
+      const rolesAlreadyExists = roles.filter(({ id }) => id === role_id);
+      return rolesAlreadyExists.length ? rolesAlreadyExists[0] : null;
     },
   },
 };
