@@ -57,3 +57,15 @@ curl 'http://localhost:4000/' \
   -H 'Origin: http://localhost:4000' \
   --data-binary '{"query":"# Write your query or mutation here\n{\n  users {\n    id\n    name\n    email\n    age\n    role {\n      id\n      name\n    }\n  }\n}"}' \
   --compressed
+
+### CREATE A NEW USER
+
+curl 'http://localhost:4000/' \
+  -H 'Accept-Encoding: gzip, deflate, br' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Connection: keep-alive' \
+  -H 'DNT: 1' \
+  -H 'Origin: http://localhost:4000' \
+  --data-binary '{"query":"mutation {\n  newUser(name:\"Maria\", email:\"maria@gmail.com\", age: 19) {\n    id\n    name\n    email\n    status\n    role {\n      id\n      name\n    }\n  }\n}"}' \
+  --compressed
