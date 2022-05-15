@@ -22,7 +22,7 @@ curl 'http://localhost:4000/' \
   --data-binary '{"query":"# Write your query or mutation here\n{\n  user(id: 1) {\n    id\t\n    name\n    email\n    age\n  }\n}\n"}' \
   --compressed
 
-### GET PROFILE BY ID
+### GET ROLES BY ID
 
 curl 'http://localhost:4000/' \
   -H 'Accept-Encoding: gzip, deflate, br' \
