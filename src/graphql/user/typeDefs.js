@@ -27,6 +27,10 @@ const typeDefs = gql`
     roles: [Role!]!
     role(id: Int): Role
   }
+
+  type Mutation {
+    newUser(name: String, email: String, age: Int): User!
+  }
 `;
 
 module.exports = typeDefs;

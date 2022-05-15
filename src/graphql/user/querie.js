@@ -1,6 +1,6 @@
 const { gql } = require("graphql-tag");
 
-export const FRAGMENT_USER = gql`
+export const QUERY_FRAGMENT_USER = gql`
   fragment usuarioCompleto on User {
     id
     name
@@ -14,7 +14,7 @@ export const FRAGMENT_USER = gql`
   }
 `;
 
-export const GET_ALL_USERS = gql`
+export const QUERY_GET_ALL_USERS = gql`
   query {
     users {
       id
@@ -30,7 +30,7 @@ export const GET_ALL_USERS = gql`
   }
 `;
 
-export const GET_USER_BY_ID = gql`
+export const QUERY_GET_USER_BY_ID = gql`
   query(id: $id) {
     users {
       id
@@ -46,7 +46,7 @@ export const GET_USER_BY_ID = gql`
   }
 `;
 
-export const GET_ALL_ROLES = gql`
+export const QUERY_GET_ALL_ROLES = gql`
   query {
     roles {
       id
@@ -55,7 +55,7 @@ export const GET_ALL_ROLES = gql`
   }
 `;
 
-export const GET_ROLES_BY_ID = gql`
+export const QUERY_GET_ROLES_BY_ID = gql`
   query(id: $id) {
     roles {
       id
@@ -64,10 +64,25 @@ export const GET_ROLES_BY_ID = gql`
   }
 `;
 
-export const GET_ALL_USER_COMPLETE = gql`
+export const QUERY_GET_ALL_USER_COMPLETE = gql`
   query {
     user(id: 1) {
       ...usuarioCompleto
+    }
+  }
+`;
+
+export const MUTATION_CREATE_NEW_USER = gql`
+  mutation {
+    newUser(name: "Maria", email: "maria@gmail.com", age: 19) {
+      id
+      name
+      email
+      status
+      role {
+        id
+        name
+      }
     }
   }
 `;
