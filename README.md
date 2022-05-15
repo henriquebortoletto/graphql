@@ -17,7 +17,7 @@
 
 Esse é um repositório de estudo de `graphql` utilizando `apollo` como base para criação de uma api `graphql`.
 
-- [ ] Schema e Queries
+- [x] Schema e Queries
 - [ ] Mutations
 - [ ] Banco de dados e graphql
 - [ ] Backend com graphql

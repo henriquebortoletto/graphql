@@ -6,6 +6,7 @@ export const FRAGMENT_USER = gql`
     name
     email
     age
+    status
     role {
       id
       name
@@ -20,6 +21,7 @@ export const GET_ALL_USERS = gql`
       name
       email
       age
+      status
       role {
         id
         name
@@ -35,6 +37,7 @@ export const GET_USER_BY_ID = gql`
       name
       email
       age
+      status
       role {
         id
         name

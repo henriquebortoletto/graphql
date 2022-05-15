@@ -27,6 +27,10 @@ const resolvers = {
       const userRoleExists = roles.filter(({ id }) => id === role_id);
       return userRoleExists.length ? userRoleExists[0] : null;
     },
+
+    status: (user) => {
+      return user.status.toUpperCase();
+    },
   },
 };
 
